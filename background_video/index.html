@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./js/bideo.js"></script>
+  <link rel="stylesheet" href="./css/reset.css">
+  <style>
+    body,html{
+      width: 100%;
+      height:100%;
+    }
+  #bg_container {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  z-index: 3;
+}
+
+.background_video {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  object-fit: cover;
+  height: 36.99rem;
+  width: 100%;
+}
+
+.background_video_home{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+#video_cover {
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.scroll_box{
+  width: 100%;
+  background: rgba(242, 242, 242, 0.95);
+  height:3000px;
+  position: relative;
+  z-index: 10;
+}
+</style>
+</head>
+<body>
+  <div class="back_video">
+    <div id="bg_container">
+      <video id="background_video" class="background_video_home" autoplay loop muted></video>
+      <div id="video_cover" style="background-image: url('./static/home.jpeg')"></div>
+    </div>
+  </div>
+  <div style="height:100%;width:100%;">123</div>
+  <div class="scroll_box">
+  
+  </div>
+</body>
+<script>
+  const bv = new window.Bideo();
+    bv.init({
+      // Video元素
+      videoEl: document.querySelector('#background_video'),
+      // 容器元素
+      // container: document.querySelector('body'),
+      // 自适应调整
+      resize: true,
+      // autoplay: false,
+      isMobile: window.matchMedia('(max-width: 767px)').matches,
+      // 加载视频源, 根据实际业务更换自己的视频源文件
+      src: [
+        {
+          src: 'https://download.mia.com/newpc/home.mp4',
+          type: 'video/mp4',
+        },
+      ],
+      // 一旦视频加载后即将视频封面隐藏
+      onLoad() {
+        document.querySelector('#video_cover').style.display = 'none';
+      },
+    });
+</script>
+</html>
